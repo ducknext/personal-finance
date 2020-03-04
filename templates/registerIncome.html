@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Register expenses</title>
+</head>
+<body>
+<div >
+
+<form action="/income" method="POST" id="addInForm"> 
+
+  
+  <br>
+  <font size="6">Register income</font>
+  <br><br>
+
+  <br>    
+  <label> Select income source 
+  <select name = "incomeSource">
+    {{range .IncomeNames}}
+    <option value="{{.}}"><li>{{.}}</li></option>
+    {{end}}
+  </select>
+
+  <br><br>
+  <label> or add a new one 
+  </label><input name="name" type="text" value="" />
+
+  <br><br>
+  <label> Amount </label><input name="amount" type="text" value="" />
+  <br><br>
+  <label>Comment </label><textarea name="comment"></textarea><br />
+  <br><br>
+  <input type="submit" value="Submit" />
+</form>
+
+
+<form>
+  <br><br>  
+  <input TYPE="button" VALUE="Home Page" onclick="window.location.href='/'">
+</form>
+
+</div>
+
+
+
+
+
+
+</body>
+</html>
+

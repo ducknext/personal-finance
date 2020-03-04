@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Home</title>
+
+  <style>
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 15px;
+        max-width:100%;
+        white-space:nowrap;
+      }
+      th {
+        text-align: left;
+      }
+  </style>
+
+</head>
+
+<body>
+<div>
+
+
+  <br>
+  <font size="6">{{.MonthNow}} {{.YearNow}}</font>
+  <br>
+
+  <p> Income: {{ .IncomeSumNowMonth }} DKK </p>
+  <p> Expenses: {{ .ExpensesSumNowMonth }} DKK </p>
+  <p> Left: {{ .LeftNowMonth }} DKK </p>
+  <p> Including 2000 DKK for savings </p>
+
+
+  <br>
+  <a href="/expenses">Register expenses</a>
+  
+  <br>
+  <a href="/income">Register income</a>
+ 
+  <br>
+  <a href="/show">Show current month Income and Expenses</a>
+
+  <br><br> 
+
+  <br><br>
+  <font size="6">From {{.FirstMonth}} {{.FirstYear}} to {{.MonthNow}} {{.YearNow}}</font>
+  <br><br>
+
+  <label> Overview by Years  <br><br>
+  <table id="AllOverview">
+      <tr>
+        <th> </th>
+        {{range .UniqueYearsList}}
+        <th>{{.}}</th>
+        {{end}}
+      </tr>
+      <tr>
+        <td>All Expenses</td>
+        {{range .SumByYearEx}}
+        <td>{{.}}</td>
+        {{end}}
+      </tr>
+      <tr>
+        <td>Income</td>
+        {{range .SumByYearIn}}
+        <td>{{.}}</td>
+        {{end}}
+      </tr>
+      <tr>
+        <td>Difference</td>
+        {{range .SavingsByYear}}
+        <td>{{.}}</td>
+        {{end}}
+      </tr>
+  </table>
+
+  <br><br>
+  
+  <label> Overview by Months  <br><br>
+  <table id="AllMonthsOverview">
+      <tr>
+        <th> </th>
+        {{range .UniqueYMList}}
+        <th>{{.}}</th>
+        {{end}}
+      </tr>
+      <tr>
+        <td>Expenses</td>
+        {{range .SumByMonthEx}}
+        <td>{{.}}</td>
+        {{end}}
+      </tr>
+      <tr>
+        <td>Income</td>
+        {{range .SumByMonthIn}}
+        <td>{{.}}</td>
+        {{end}}
+      </tr>
+      <tr>
+        <td>Difference</td>
+        {{range .SavingsByMonth}}
+        <td>{{.}}</td>
+        {{end}}
+      </tr>
+  </table>
+
+  <br><br>
+
+
+</div>
+
+
+
+</body>
+
+</html>
+

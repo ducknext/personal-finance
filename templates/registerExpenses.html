@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Register expenses</title>
+</head>
+<body>
+<div >
+
+<form action="/expenses" method="POST" id="addExpForm"> 
+
+  
+  <br>
+  <font size="6">Register expenses</font>
+  <br><br>
+
+
+  <script type="text/javascript">
+    var subcategory = {
+      Food: ["At Home", "Outside"],
+      Regular: ["Bills", "Kbh Transport", "Savings"],
+      Irregular: ["Clothes", "Development", "For Home", "Hobby And Entertainment", "Hygiene And Cleaning", "Presents", "Traveling", "Other"]
+    }
+
+    function makeSubmenu(value) {
+        if (value.length == 0) document.getElementById("categorySelect").innerHTML = "<option></option>";
+        else {
+            var citiesOptions = "";
+            for (categoryId in subcategory[value]) {
+                citiesOptions += "<option>" + subcategory[value][categoryId] + "</option>";
+            }
+            document.getElementById("categorySelect").innerHTML = citiesOptions;
+        }
+    }
+
+    function resetSelection() {
+        document.getElementById("category").selectedIndex = 0;
+        document.getElementById("categorySelect").selectedIndex = 0;
+    }
+</script>
+
+<body onload="resetSelection()">
+    <select name="category" id="category" size="1" onchange="makeSubmenu(this.value)">
+<option value="" disabled selected>Choose Category</option>
+<option>Food</option>
+<option>Regular</option>
+<option>Irregular</option>
+</select>
+    <select name="categorySelect" id="categorySelect" size="1">
+<option value="" disabled selected>Choose Subcategory</option>
+<option></option>
+</select>
+
+  <br><br>
+  <label> Amount </label><input name="amount" type="text" value="" />
+  <br><br>
+  <label>Comment </label><textarea name="comment"></textarea><br />
+  <br><br>
+  <label>If date oter than today (yyyy-mm-dd)  </label><textarea name="date"></textarea><br />
+  <br><br>
+
+  <input type="submit" value="Submit" />
+</form>
+
+<br><br>
+<a href="/regular">Add regular expenses</a>
+
+<form>
+  <br><br>  
+  <input TYPE="button" VALUE="Home Page" onclick="window.location.href='/'">
+</form>
+
+</div>
+
+
+
+
+
+
+</body>
+</html>
+

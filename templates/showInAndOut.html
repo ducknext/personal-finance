@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Show</title>
+</head>
+<body>
+<div>
+
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 15px;
+      max-width:100%;
+      white-space:nowrap;
+    }
+    th {
+      text-align: left;
+    }
+</style>
+
+
+
+  <br>
+  <font size="6">{{.MonthNow}} {{.YearNow}}</font>
+  <br><br>
+
+  <form>
+    <input TYPE="button" VALUE="Home Page" onclick="window.location.href='/'">
+  </form>
+
+  <!--  Expenses overview table   -->
+  <p>Overview  </p>
+  <table id="Overview">
+
+    <tr>
+      {{range .AllCatNames}}
+      <th>{{.}}</th>
+      {{end}}
+    </tr>
+    <tr>
+      {{range .CatSumCalc}}
+        <td>{{.}}</td>
+      {{end}}
+    </tr>
+
+  </table>
+
+  <!--  Income table   -->
+  <p>Income  </p>
+
+  <table id="Income">
+    <tr>
+        <th>Source</th>
+        <th>Amount In</th>
+        <th>Comment</th>
+    </tr>
+    {{range .Income}}   
+    <tr>
+        <td>{{.Category}}</td>
+        <td>{{.Amount}}</td>
+        <td>{{.Comment}}</td>
+    </tr>
+    {{end}}
+  </table>
+
+<!--  Expenses table   -->
+<br>
+<p>Expenses  </p>
+
+<select name="categoriesDropdown" id="categoriesDropdown" oninput="filterTableCat()">
+  <option>All</option>
+  {{range .CatNames}}
+  <option value="{{.}}"><li>{{.}}</li></option>
+  {{end}}
+</select>
+
+<select name="subCategoriesDropdown" id="subCategoriesDropdown" oninput="filterTableSubCat()">
+  <option>All</option>
+  {{range .SubCatNames}}
+  <option value="{{.}}"><li>{{.}}</li></option>
+  {{end}}
+</select>
+
+<table id="Expenses">
+  <tr>
+      <th>Category</th>
+      <th>Subcategory</th>
+      <th>Amount</th>
+      <th>Comment</th>
+  </tr>
+  {{range .Expenses}}   
+  <tr>
+      <td>{{.Category}}</td>
+      <td>{{.SubCategory}}</td>
+      <td>{{.Amount}}</td>
+      <td>{{.Comment}}</td>
+  </tr>
+  {{end}}
+</table>
+
+<br><br>
+
+
+  
+</div>
+
+<!--  Scripts  -->
+<script>
+  function filterTableCat() {
+    // Variables
+    let dropdown, table, rows, cells, category, filter;
+    dropdown = document.getElementById("categoriesDropdown");
+    table = document.getElementById("Expenses");
+    rows = table.getElementsByTagName("tr");
+    filter = dropdown.value;
+  
+    // Loops through rows and hides those with categories that don't match the filter
+    for (let row of rows) { // `for...of` loops through the NodeList
+      cells = row.getElementsByTagName("td");
+      category = cells[0] || null; // gets the 2nd `td` or nothing
+      // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+      if (filter === "All" || !category || (filter === category.textContent)) {
+        row.style.display = ""; // shows this row
+      }
+      else {
+        row.style.display = "none"; // hides this row
+      }
+    }
+  }
+</script>
+
+<script>
+  function filterTableSubCat() {
+    // Variables
+    let dropdown, table, rows, cells, subcategory, filter;
+    dropdown = document.getElementById("subCategoriesDropdown");
+    table = document.getElementById("Expenses");
+    rows = table.getElementsByTagName("tr");
+    filter = dropdown.value;
+  
+    // Loops through rows and hides those with countries that don't match the filter
+    for (let row of rows) { // `for...of` loops through the NodeList
+      cells = row.getElementsByTagName("td");
+      subcategory = cells[1] || null; // gets the 2nd `td` or nothing
+      // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+      if (filter === "All" || !subcategory || (filter === subcategory.textContent)) {
+        row.style.display = ""; // shows this row
+      }
+      else {
+        row.style.display = "none"; // hides this row
+      }
+    }
+  }
+</script>
+
+<br><br> 
+
+</body>
+
+</html>
+
+
+
+
+
